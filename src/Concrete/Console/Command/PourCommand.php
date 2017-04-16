@@ -17,8 +17,8 @@ class PourCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('c5:pour:package-controller')
-            ->setDescription('Generate controller class')
+            ->setName('c5:pour')
+            ->setDescription('Generate class file interactively.')
         ;
     }
 
@@ -38,16 +38,13 @@ class PourCommand extends Command
 
         $generator = new PackageControllerGenerator($pkgHandle, $pkgName, $pkgDescription);
 
-        $appVersionRequiredQuestion = new Question(
-            'Please input the version of concrete5 required by the package:',
-            '5.8.0'
-        );
+        $appVersionRequiredQuestion = new Question('Please input the version of concrete5 required by the package:');
         $appVersionRequired = $helper->ask($input, $output, $appVersionRequiredQuestion);
         if ($appVersionRequired) {
             $generator->setAppVersionRequired($appVersionRequired);
         }
 
-        $pkgVersionQuestion = new Question('Please input the version of the package:', '0.1');
+        $pkgVersionQuestion = new Question('Please input the version of the package:');
         $pkgVersion = $helper->ask($input, $output, $pkgVersionQuestion);
         if ($pkgVersion) {
             $generator->setPkgVersion($pkgVersion);
